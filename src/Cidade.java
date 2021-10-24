@@ -4,72 +4,77 @@ import java.util.Set;
 
 
 public class Cidade {
-  //tabela com todas as cidades por nome
-  public static HashMap<String, Cidade> cidades = new HashMap<String, Cidade>();
 
-  //nome da cidade
-  public String nome;
+  public static HashMap<String, Cidade> cidades = new HashMap<String, Cidade>(); // Tabela com todas as cidades por nome
+  public String nome;                                                            // Nome da cidade
+  public final HashSet<Link> links = new HashSet<Link>();                        // Link da cidade adjacente
+  public int distancia;                                                          // Menor distancia
+  public Link linkPai;                                                           // Menor caminho percorrido
 
-  //link da cidade adjacente
-  public final HashSet<Link> links = new HashSet<Link>();
 
-  //menor distancia
-  public int distancia;
-
-  //menor caminho percorrido
-  public Link linkPai;
-
-  /* contrutor para Cidade com um nome
+  /**
+   *Contrutor para Cidade com um nome
    * adicionado a tabela (HashMap) de cidades
-   */
-  public Cidade(String nm) {
-    nome = nm;
+   */                                                                        //Refatoração: Padronização do comentário
+  public Cidade(String nomeDaCidade) {                                       //Refatoração: Alteração no nome do parâmetro para nomeDaCidade
+    this.nome = nomeDaCidade;
     cidades.put(nome, this);
   }
 
-  //O comentário não está padronizado
-  /* Método para encontrar uma cidade pelo nome
-   * retorna a cidade se ela existir na tabela
-   * caso contrário retorna uma nova cidade com o nome informado
-   */
-  public static Cidade encontrar(String nomeDaCidade) {//Refatorado no nome da variável nm para nomeDaCidade
+  /**
+   * @description Método para encontrar uma cidade pelo nome
+   * @param nomeDaCidade Cidade a ser encontrada
+   * @return a cidade se ela existir na tabela;
+   *         uma nova cidade com o nome informado, caso contrário;
+   */                                                                       //Refatoração: Padronização do comentário
+  public static Cidade encontrar(String nomeDaCidade) {                     //Refatoração: O nome do parâmetro foi alterado para nomeDaCidade
     Cidade p = cidades.get(nomeDaCidade);
     if (p == null) {
       p = new Cidade(nomeDaCidade);
-//      return null;          //BUG 01: Deveria retornar a nova cidade com o nome informado
-      //Correção do BUG 01, em vez de retornar null, o método retorna a nova cidade criada com o nome informado
-    }
+      //return null;                                                        //BUG 01: Deveria retornar a nova cidade com o nome informado
+    }                                                                        //Refatoração: Correção do BUG 01, atraves da exlusão do retorn null interno ao IF
     return p;
   }
 
-  /* adiciona um link entre cidades na lista de links
-   */
-  public void addLink(Link lnk) {
+  /**
+   * @description Adiciona um link entre cidades na lista de links
+   * @param link link entre cidades
+   */                                                                      //Refatoração: Padronização do comentário
+  public void addLink(Link link) {
     links.add(lnk);
   }
 
-  /* compare cidades pelos seus nomes
-   * returna negativo se c1 for alfabeticamente anterior,
-   *  0 se os nomes forem os menos,
-   *  e positivo se c2 for alfabeticamente maior
-   */
-  public int comparaNome(Cidade p) {
-    //return p.nome.compareTo(p.nome);  //BUG02: Compara o nome do mesmo objeto e sempre retorna 0, por que sempre é igual
-    return this.nome.compareTo(p.nome); //Cógigo corrigido
+  /**
+   * @description Compara cidades pelos seus nomes
+   *              até a rede de trens (ponto 0)
+   * @param cidadeAComparar Cidade a ser comparada
+   * @return inteiro negativo se cidadeAComparar for alfabeticamente maior;
+   *         0 se os nomes forem os menos;
+   *         inteiro positivo se cidadeAComparar for alfabeticamente menor;
+   */                                                                      //Refatoração: Padronização do comentário
+  public int comparaNome(Cidade cidadeAComparar) {                         //Refatoração: Nome de parâmetro alterado para cidadeAComparar
+    //return p.nome.compareTo(cidadeAComparar.nome);                       //BUG 02: Sempre iria comparar o nome do mesmo objeto e sempre retorna 0
+    return this.nome.compareTo(cidadeAComparar.nome);                      //Refatoração: Código corrigido
   }
 
-  /* returna o nome da cidade
-   */
-  public String toString() { //Renomear o nome do método para getNomeCidade
+  /**
+   * @description Retorna o nome da cidade
+   * @return String nome da cidade
+   */                                                                      //Refatoração: Padronização do comentário
+  public String toString() {
     return nome;
   }
 
-  /* compara cidades pela sua distancia até a rede de trens (ponto 0)
-   * returna negativo se c1 for mais próxima, 0 se a distancia for a mesma, e positivo se c2 for mais próxima
-   */
-  public int comparaDistancia(Cidade c2) {
-    //Refatorado pra utilizar o this e passar somente um parâmetro
-    return this.distancia - c2.distancia; //
+  /**
+   * @description Compara cidades pela sua distancia
+   *              até a rede de trens (ponto 0)
+   * @param cidadeAComparar Cidade a ser comparada
+   * @return inteiro negativo se cidadeAComparar for mais distante;
+   *         0 se a distancia for a mesma;
+   *         inteiro positivo se cidadeAComparar for mais próxima;
+   */                                                                      //Refatoração: Padronização do comentário
+  public int comparaDistancia(Cidade cidadeAComparar) {
+    return (this.distancia - cidadeAComparar.distancia);                   //Refatoração: Foi utilizado o this para evitar a passagem de dois parâmetros
   }
 
 }

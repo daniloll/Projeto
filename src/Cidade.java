@@ -41,7 +41,7 @@ public class Cidade {
    * @param link link entre cidades
    */                                                                      //Refatoração: Padronização do comentário
   public void addLink(Link link) {
-    links.add(lnk);
+    links.add(link);
   }
 
   /**

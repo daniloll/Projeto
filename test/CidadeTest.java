@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CidadeTest {
 
-    public Cidade cidade1 = new Cidade("Cidade 1");
-    public Cidade cidade2 = new Cidade("Cidade 2");
+    public Cidade cidade1 = new Cidade("Cidade 01");
+    public Cidade cidade2 = new Cidade("Cidade 02");
     public Link linkCidades = new Link(cidade1, cidade2, 100);
 
     //Refactado o nome dos métodos para o padrão test<NomeDoMétodo>

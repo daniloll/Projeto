@@ -11,7 +11,7 @@ class LinkTest {
     public Cidade cidade4 = new Cidade("Cidade 04");
     public Link linkCidades = new Link(cidade1, cidade2, 550);
 
-    /* retorna o tamanho de um link entre duas cidades */
+
     @Test
     void testGetTamanho() {
         assertEquals(550,linkCidades.getTamanho(),"O valor do tamanho está inconsistente");
@@ -38,24 +38,28 @@ class LinkTest {
     void testCompareToLinksComAsMesmasCidades() {
          assertEquals(0,linkCidades.compareTo(linkCidades), "Os links não possuem as cidades iguais");
     }
+
     @Test
     void testCompareToLinksComAsCidadesDiferentes() {
         Link linkCidadesDiferentes = new Link(cidade3, cidade4, 550);
         int valorComparacao = linkCidades.compareTo(linkCidadesDiferentes);
         assertTrue(valorComparacao < 0,"Os links não possuem todas as cidades diferentes");
     }
+
     @Test
     void testCompareToLinksComSomenteAsPrimeirasCidadesIguais() {
         Link linkCidadesDiferentes = new Link(cidade1, cidade4, 550);
         int valorComparacao = linkCidades.compareTo(linkCidadesDiferentes);
         assertTrue(valorComparacao < 0, "Os links não possuem as primeiras cidades iguais ");
     }
+
     @Test
     void testCompareToLinksCidade1MaiorComAsSegundasCidadesIguais() {
         Link linkCidadesDiferentes = new Link(cidade3, cidade2, 550);
         int valorComparacao = linkCidadesDiferentes.compareTo(linkCidades);
         assertTrue(valorComparacao > 0, "O link1 não possue a Cidade1 maior e/ou as segundas cidades iguais");
     }
+
     @Test
     void testCompareToLinksCidade1MenorComAsSegundasCidadesIguais() {
         Link linkCidadesDiferentes = new Link(cidade3, cidade2, 550);

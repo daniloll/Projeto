@@ -32,7 +32,7 @@ public class Cidade {
     if (p == null) {
       p = new Cidade(nomeDaCidade);
       //return null;                                                        //BUG 01: Deveria retornar a nova cidade com o nome informado
-    }                                                                        //Refatoração: Correção do BUG 01, atraves da exlusão do retorn null interno ao IF
+    }                                                                       //Refatoração: Correção do BUG 01, atraves da exlusão do retorn null interno ao IF
     return p;
   }
 
